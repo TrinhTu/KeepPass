@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="255.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.changeaccount">
+   <children>
+      <JFXTextField fx:id="tf_user" labelFloat="true" layoutX="51.0" layoutY="50.0" prefHeight="30.0" prefWidth="280.0" promptText="Username">
+         <font>
+            <Font name="Times New Roman" size="18.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="tf_email" labelFloat="true" layoutX="51.0" layoutY="112.0" prefHeight="30.0" prefWidth="280.0" promptText="Password">
+         <font>
+            <Font name="Times New Roman" size="18.0" />
+         </font></JFXTextField>
+      <JFXButton buttonType="RAISED" layoutX="51.0" layoutY="179.0" onAction="#Cancel" prefHeight="44.0" prefWidth="114.0" ripplerFill="#ee1db3" text="Cancel">
+         <font>
+            <Font name="Times New Roman" size="18.0" />
+         </font>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="211.0" layoutY="179.0" onAction="#ChangeAccount" prefHeight="44.0" prefWidth="114.0" ripplerFill="#ee1db3" text="Save">
+         <font>
+            <Font name="Times New Roman" size="18.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

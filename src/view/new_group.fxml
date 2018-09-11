@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#EnterAction" prefHeight="144.0" prefWidth="459.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.newgroup_control">
+   <children>
+      <JFXButton focusTraversable="false" layoutX="347.0" layoutY="50.0" onAction="#Save" prefHeight="37.0" prefWidth="94.0" ripplerFill="#ee1db3" style="-fx-background-color: #FAEBD7;" text="Save" />
+      <JFXTextField fx:id="tf_group" alignment="CENTER" labelFloat="true" layoutX="41.0" layoutY="36.0" prefHeight="51.0" prefWidth="284.0" promptText="Name group" unFocusColor="#ee1db3">
+         <font>
+            <Font name="Times New Roman" size="18.0" />
+         </font>
+      </JFXTextField>
+   </children>
+</AnchorPane>
