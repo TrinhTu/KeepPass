@@ -12,7 +12,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="689.0" prefWidth="1007.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.home_control">
    <children>
-      <AnchorPane prefHeight="71.0" prefWidth="1007.0">
+      <AnchorPane prefHeight="71.0" prefWidth="1007.0" style="-fx-background-color: #F5FFFA;">
          <children>
             <MenuButton fx:id="menubutton" layoutX="855.0" layoutY="11.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="145.0">
               <items>
@@ -28,11 +28,25 @@
                   </ImageView>
                </graphic>
             </MenuButton>
-            <JFXButton layoutX="148.0" layoutY="22.0" onAction="#export" text="Export" />
-            <JFXButton layoutX="233.0" layoutY="20.0" onAction="#import_file" text="Import" />
-            <JFXButton layoutX="23.0" layoutY="20.0" onAction="#Openform" text="New_info">
+            <JFXButton layoutX="155.0" layoutY="20.0" onAction="#export" style="-fx-background-color: #87CEEB;" text="Export">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icon/export.png" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
+            <JFXButton layoutX="273.0" layoutY="20.0" onAction="#import_file" style="-fx-background-color: #87CEEB;" text="Import">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icon/import.png" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
+            <JFXButton layoutX="23.0" layoutY="20.0" onAction="#Openform" style="-fx-background-color: #87CEEB;" text="New_info">
+               <graphic>
+                  <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../icon/new_file.png" />
                      </image>
@@ -41,17 +55,17 @@
             </JFXButton>
          </children>
       </AnchorPane>
-      <TableView fx:id="table" editable="true" layoutX="154.0" layoutY="70.0" prefHeight="620.0" prefWidth="839.0">
+      <TableView fx:id="table" editable="true" layoutX="144.0" layoutY="71.0" prefHeight="619.0" prefWidth="865.0" style="-fx-background-color: #F5FFFA;">
          <columns>
             <TableColumn fx:id="col_title" onEditCommit="#changeTitleevent" prefWidth="115.0" text="Title" />
             <TableColumn fx:id="col_user" onEditCommit="#changeUserevent" prefWidth="118.0" text="Username" />
-            <TableColumn fx:id="col_pass" onEditCommit="#changePassevent" prefWidth="119.00003051757812" text="Password" />
-            <TableColumn fx:id="col_url" onEditCommit="#changeUrlevent" prefWidth="214.0" text="URLs" />
-            <TableColumn fx:id="col_note" onEditCommit="#changeNoteevent" prefWidth="134.0" text="Note" />
-            <TableColumn fx:id="col_group" onEditCommit="#changeGroupEvent" prefWidth="135.0" text="Group" />
+            <TableColumn fx:id="col_pass" onEditCommit="#changePassevent" prefWidth="128.0" text="Password" />
+            <TableColumn fx:id="col_url" onEditCommit="#changeUrlevent" prefWidth="206.00003051757812" text="URLs" />
+            <TableColumn fx:id="col_note" onEditCommit="#changeNoteevent" prefWidth="143.0" text="Note" />
+            <TableColumn fx:id="col_group" onEditCommit="#changeGroupEvent" prefWidth="138.0" text="Group" />
          </columns>
       </TableView>
-      <JFXListView fx:id="list" layoutY="108.0" prefHeight="582.0" prefWidth="145.0" />
-      <JFXButton layoutX="-2.0" layoutY="70.0" onAction="#load_data" prefHeight="40.0" prefWidth="145.0" style="-fx-background-color: aqua;" text="General" />
+      <JFXListView fx:id="list" layoutY="108.0" prefHeight="582.0" prefWidth="138.0" style="-fx-background-color: #F5FFFA;" />
+      <JFXButton layoutX="-2.0" layoutY="70.0" onAction="#load_data" prefHeight="40.0" prefWidth="138.0" style="-fx-background-color: #87CEEB;" text="General" />
    </children>
 </AnchorPane>

@@ -13,8 +13,7 @@ import java.sql.DriverManager;
  * @author Tú Trinh
  */
 public class Connect {
-    
-    public Connection getconnect(){
+    public  Connection getconnect(){
         Connection conn = null;
         String dbURL;
         try {

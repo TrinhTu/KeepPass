@@ -7,7 +7,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="146.0" prefWidth="498.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SendMail">
    <children>
-      <JFXTextField fx:id="tf_email" alignment="CENTER" focusColor="#1d9be0" labelFloat="true" layoutX="30.0" layoutY="43.0" prefHeight="43.0" prefWidth="300.0" promptText="Enter your email" unFocusColor="#1b87cf">
+      <JFXTextField fx:id="tf_name" alignment="CENTER" focusColor="#1d9be0" labelFloat="true" layoutX="30.0" layoutY="43.0" prefHeight="43.0" prefWidth="300.0" promptText="Enter Username" unFocusColor="#1b87cf">
          <font>
             <Font name="Times New Roman" size="18.0" />
          </font>

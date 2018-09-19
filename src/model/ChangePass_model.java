@@ -32,7 +32,7 @@ public class ChangePass_model {
             return pass;
             
         } catch (Exception e) {
-            e.printStackTrace();
+           // e.printStackTrace();
             return null;
         }
     }
@@ -49,7 +49,7 @@ public class ChangePass_model {
         } 
         
         catch (Exception e) {
-            e.printStackTrace();
+           // e.printStackTrace();
         }
     }
     

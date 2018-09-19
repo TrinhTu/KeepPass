@@ -1,5 +1,6 @@
 package model;
 
+import controller.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,17 +13,16 @@ import java.util.ArrayList;
  */
 public class Newinfo_model {
     PreparedStatement pstmt;
-    Connect conDB = new Connect();
     ResultSet rs;
             
     //insert data into newInfo
     public boolean insert(String title,String username,String pass, String url, String note, String groupname, int userID) {
+        
         Integer groupid = getidgroup(groupname);
         String sql = "INSERT INTO new_info(title,username,pass,url,note,groupID,userID) VALUES(?,?,?,?,?,?,?)";
-        
         try{
-                Connection  conn = conDB.getconnect();
-
+            Connect conDB = new Connect();
+            Connection  conn = conDB.getconnect();
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, title);
             pstmt.setString(2, username);
@@ -45,8 +45,8 @@ public class Newinfo_model {
         String sql = "Select * from group_accounts where userID = ?";
         ArrayList<String> list = new ArrayList<>();
         try {
-                Connection  conn = conDB.getconnect();
-
+            Connect conDB = new Connect();
+            Connection  conn = conDB.getconnect();
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, userid);
             rs= pstmt.executeQuery();
@@ -63,8 +63,8 @@ public class Newinfo_model {
         String sql = "Select id from group_accounts where nameGroup = ?";
         ArrayList<String> list = new ArrayList<>();
         try {
-                Connection  conn = conDB.getconnect();
-
+            Connect conDB = new Connect();
+            Connection  conn = conDB.getconnect();
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, groupname);
             rs= pstmt.executeQuery();
@@ -80,8 +80,8 @@ public class Newinfo_model {
    public String getnamegroup(int groupid){
         String sql = "Select nameGroup from group_accounts where id = ?";
         try {
-                Connection  conn = conDB.getconnect();
-
+            Connect conDB = new Connect();
+            Connection  conn = conDB.getconnect();
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, groupid);
             rs= pstmt.executeQuery();
@@ -93,6 +93,5 @@ public class Newinfo_model {
         }
         return null;
    }
-    
     
 }

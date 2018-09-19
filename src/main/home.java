@@ -5,7 +5,6 @@
  */
 package main;
 
-import controller.login_control;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

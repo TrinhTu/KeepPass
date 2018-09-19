@@ -35,11 +35,11 @@ public class New_Pass implements Initializable{
         text_oldpass = tf_oldpass.getText();
         text_newpass = tf_newpass.getText();
         text_conpass = tf_conpass.getText();
-        String newpass = new sha256().getSHA256(text_oldpass);
+        String newpass = new Encryptor().EncryptPassUser(text_oldpass);
         String passold = new ChangePass_model().getPass(User.name);
         if(newpass.equals(passold) &&  text_newpass.equals(text_conpass)){
             Updatepass_model update = new Updatepass_model();
-            String sha_pass = new sha256().getSHA256(text_newpass);
+            String en_pass = new Encryptor().EncryptPassUser(text_newpass);
             ArrayList<ArrayList<String>> rows = update.getPass();
             
             User.pass = text_newpass;
@@ -49,7 +49,7 @@ public class New_Pass implements Initializable{
                        new Encryptor(User.pass).encrypt(row.get(1))
                );
             }
-            new ChangePass_model().UpdatePass(sha_pass, User.name); //update pass
+            new ChangePass_model().UpdatePass(en_pass, User.name); //update pass
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("Successfull !!!");
             alert.showAndWait();

@@ -7,6 +7,7 @@ package controller;
 
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -32,17 +33,28 @@ public class changeaccount implements Initializable{
     public void ChangeAccount(){
         text_user = tf_user.getText();
         text_email = tf_email.getText();
+        ArrayList<String> listemail = new ArrayList<>();
+        ArrayList<String> listname = new ArrayList<>();
         changeaccount_model change_model = new changeaccount_model();
-        if(change_model.updateUser(text_user, text_email, User.name)){
+        listemail.addAll(change_model.getdataEmail());
+        listname.addAll(change_model.getdataName());
+        
+        if(listemail.contains(text_email)){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Email is exists");
+            alert.showAndWait();
+        }
+        else if(listname.contains(text_user)){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Email is exists");
+            alert.showAndWait();
+        }
+        else{
+            change_model.updateUser(text_user, text_email, User.name) ;
             User.name = text_user;
             User.email = text_email;
             Stage stage = (Stage) tf_user.getScene().getWindow();
             stage.close();
-        }
-        else{
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("Failed");
-            alert.showAndWait();
         }
     }
     

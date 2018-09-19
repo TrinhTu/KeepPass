@@ -115,7 +115,6 @@ public class table_model {
           Connection  conn = conDB.getconnect();
           pstmt = conn.prepareStatement(sql);
           pstmt.setInt(1, userid);
-          //pstmt.setString(1, name);
             ResultSet rs = pstmt.executeQuery();
             while(rs.next()){
                 ArrayList<String> passchange = new ArrayList<>();
@@ -264,13 +263,13 @@ public class table_model {
     }
     
     //delete row in tableview
-    public void deleterow(String groupname){
-        int groupid = new Newinfo_model().getidgroup(groupname);
-        String sql = "delete from new_info where groupID = ?";
+    public void deleterow(int id){
+//        int groupid = new Newinfo_model().getidgroup(groupname);
+        String sql = "delete from new_info where id = ?";
         try {
             Connection  conn = conDB.getconnect();
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, groupid);
+            pstmt.setInt(1, id);
             pstmt.executeUpdate();
             conn.close();
         } catch (Exception ex) {
@@ -289,7 +288,7 @@ public class table_model {
             pstmt.executeUpdate();
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(table_model.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(table_model.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

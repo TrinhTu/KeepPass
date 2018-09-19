@@ -26,6 +26,7 @@ public class Updatepass_model {
             String sql = "Select id, pass from new_info where userID = ?";
             Connection  conn = conDB.getconnect();
             PreparedStatement pstmt = conn.prepareStatement(sql);
+            System.out.print(User.id);
             pstmt.setInt(1, User.id);
             ResultSet rs = pstmt.executeQuery();
             while(rs.next()){

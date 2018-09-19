@@ -17,25 +17,24 @@ import java.util.logging.Logger;
  * @author Tú Trinh
  */
 public class login_model {
+    
     public boolean Dangnhap(String user, String pass){
-         Connect connectDB = new Connect();
-         Connection conn = connectDB.getconnect();
         try {
-            String sql = "select * from user where name = ? and pass =? ";
+            Connect connectDB = new Connect();
+            Connection conn = connectDB.getconnect();
+            String sql = "select name,pass from user where name = ? and pass =? ";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, user);
             pst.setString(2, pass);
-            ResultSet rs = pst.executeQuery();
-            if(rs.next()){
+            ResultSet rs= pst.executeQuery();
+            while(rs.next()){
                 return true;
             }
-            else{
-                return false;
-            }
+            conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(login_model.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
+             Logger.getLogger(login_model.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return false;
         } 
     
     public String getEmail(String user){
@@ -46,8 +45,9 @@ public class login_model {
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, user);
             ResultSet rs = pst.executeQuery();
-            return rs.getString("email");
-            
+            String email = rs.getString("email");
+            conn.close();
+            return email;
         } catch (SQLException ex) {
             Logger.getLogger(login_model.class.getName()).log(Level.SEVERE, null, ex);
             return null;
@@ -64,6 +64,7 @@ public class login_model {
             ResultSet rs = pst.executeQuery();
             String a =  rs.getString("id");
             int id = Integer.parseInt(a);
+            conn.close();
             return id;
             
         } catch (SQLException ex) {

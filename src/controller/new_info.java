@@ -106,7 +106,6 @@ public class new_info implements Initializable{
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setContentText("Vui long nhap day du thong tin");
             alert.showAndWait();
-
         }
         
         else if(setinfo.insert(text_title,text_user,passencrypt, text_url, text_note, group, User.id)){

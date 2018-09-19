@@ -7,6 +7,7 @@ package controller;
 
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -21,7 +22,8 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import model.email_model;
+import model.Updatepass_model;
+import model.reset_model;
 
 /**
  *
@@ -29,13 +31,13 @@ import model.email_model;
  */
 public class SendMail implements Initializable{
     @FXML
-    JFXTextField tf_email;
+    JFXTextField tf_name;
     Message message ;
 
     public void sendmail(){
                 String username = "rinchan1503@gmail.com"; // enter your mail id
 		String password = "letutrinh1503";// enter ur password
-                String emailto = tf_email.getText();
+                String name = tf_name.getText();
 
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
@@ -43,18 +45,34 @@ public class SendMail implements Initializable{
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.port", "587");
                 
-                //lay username
-                email_model em = new email_model();
-                String user = em.Email(emailto);
+                //lay email
+                reset_model reset = new reset_model();
+                String emailto = reset.Email(name);
+                
                 
                 //random pass
                 new_info nwi = new new_info();
                 String pass = nwi.randompasswd(8);
                 
                 //update pass
-                String newpass = new sha256().getSHA256(pass);
-                em.Updatepass(newpass, emailto);
-
+                String newpass = new Encryptor().EncryptPassUser(pass);
+                
+                
+                User.pass = new Encryptor().DecryptPassUser(reset.getPass(name)); // lấy pass cũ
+                User.id = reset.getUserId(name);
+                Updatepass_model update = new Updatepass_model();
+                ArrayList<ArrayList<String>> rows = update.getPass();
+                
+                User.pass = pass;
+                for(ArrayList<String> row : rows){
+                   update.UpdatePass_newinfo(
+                           row.get(0),
+                           new Encryptor(User.pass).encrypt(row.get(1))
+                   );
+                }
+                
+                reset.Updatepass(newpass, name);
+                
 		Session session = Session.getInstance(props,
 		  new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
@@ -67,8 +85,8 @@ public class SendMail implements Initializable{
 			message.setRecipients(Message.RecipientType.TO,
 				InternetAddress.parse(emailto));// whome u have to send mails that person id
 			message.setSubject("Reset Password");
-			message.setText("Keep Pass"
-				+ "\n\n User: " + user+ " yeu cau dat lai mat khau. " + "\n\n Mat khau moi la: " + pass);
+			message.setText("Keep Pass - Reset Password"
+				+ "\n\n User: " + name+ "\n\n Mat khau moi la: " + pass);
 			new Thread(new Runnable() {
                             @Override
                             public void run() {
@@ -79,7 +97,7 @@ public class SendMail implements Initializable{
                                 }
                             }
                         }).start();
-                        Stage stage = (Stage) tf_email.getScene().getWindow();
+                        Stage stage = (Stage) tf_name.getScene().getWindow();
                         stage.close();
 
 		} catch (MessagingException e) {

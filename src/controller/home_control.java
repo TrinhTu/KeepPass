@@ -1,6 +1,6 @@
 package controller;
 
-import model.test;
+import model.ImExport;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import java.awt.Desktop;
@@ -15,8 +15,6 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -42,6 +40,7 @@ import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
+import main.home;
 import main.new_windows;
 import model.Newinfo_model;
 import model.table_model;
@@ -89,12 +88,11 @@ public class home_control implements Initializable {
     }
     
     //Logout account
-    public void logout(){
+    public void logout() throws Exception{
         Stage stage = (Stage) menubutton.getScene().getWindow();
         stage.close();
-        new_windows windows = new new_windows();
-        windows.windows("/view/fxlogin.fxml");
-        
+        home newhome = new home();
+        newhome.start(stage);
     }
     
     //open change account
@@ -130,9 +128,6 @@ public class home_control implements Initializable {
        col_url.setCellFactory(TextFieldTableCell.forTableColumn());
        col_note.setCellFactory(TextFieldTableCell.forTableColumn());
        col_group.setCellFactory(TextFieldTableCell.forTableColumn());
-       
-            
-       
     }
     
     
@@ -216,7 +211,6 @@ public class home_control implements Initializable {
                     String valuegroup = cell.itemProperty().getValue();
                     list.getItems().remove(cell.getItem());
                     new table_model().DeleteGroup(valuegroup);
-                    new table_model().deleterow(valuegroup);
                     load_data();
                     
             }
@@ -311,8 +305,8 @@ public class home_control implements Initializable {
         File selectedfile = chooser.showSaveDialog(null);
         if (selectedfile != null){
             String filename = selectedfile.getAbsolutePath();
-            ArrayList<ArrayList<String>> data = new test().ExportData();
-            new test().export_db(data, filename);
+            ArrayList<ArrayList<String>> data = new ImExport().ExportData();
+            new ImExport().export_db(data, filename);
         }   
     }
     
@@ -323,12 +317,13 @@ public class home_control implements Initializable {
         File selectedfile = chooser.showOpenDialog(null);
         if (selectedfile != null){
             String filename = selectedfile.getAbsolutePath();
-            ArrayList<ArrayList> data = new test().import_db(filename);
+            ArrayList<ArrayList> data = new ImExport().import_db(filename);
             try {
-                new test().Insert(data);
+                new ImExport().Insert(data);
+                load_listview();
                 load_data();
             } catch (SQLException ex) {
-                Logger.getLogger(home_control.class.getName()).log(Level.SEVERE, null, ex);
+                //Logger.getLogger(home_control.class.getName()).log(Level.SEVERE, null, ex);
             }
         }   
     }
@@ -359,7 +354,8 @@ public class home_control implements Initializable {
                         table.getItems().remove(row.getItem());
                         // delete item in database
                         String nameGroup = row.getItem().getNameGroup();
-                        new table_model().deleterow(nameGroup);
+                        int id = row.getItem().getId();
+                        new table_model().deleterow(id);
                     });
                     
                     MenuItem copyItem = new MenuItem("Copy Password CTRL+C");

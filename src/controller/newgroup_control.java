@@ -32,9 +32,10 @@ public class newgroup_control implements Initializable{
         ArrayList<String> list = new ArrayList<>();
         Newinfo_model dataSlipt = new Newinfo_model();
         list.addAll(dataSlipt.getdataGroup(User.id));
-        if(!list.contains(group)){
+        if(!list.contains(group) && !group.trim().isEmpty()){
             tb.NewGroup(group, User.id);
         }
+        
         else{
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setContentText("Group already exists");

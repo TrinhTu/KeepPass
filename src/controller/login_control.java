@@ -31,7 +31,7 @@ public class login_control implements Initializable{
         text_name = tf_name.getText();
         text_pass = tf_pass.getText();
         login_model setlogin = new login_model();
-        String newpass = new sha256().getSHA256(text_pass);
+        String newpass = new Encryptor().EncryptPassUser(text_pass);
         if(setlogin.Dangnhap(text_name, newpass)){
             User.name=text_name;
             User.email = setlogin.getEmail(text_name);

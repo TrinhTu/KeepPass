@@ -22,6 +22,7 @@ public class register_model {
             pstmt.setString(2, email);
             pstmt.setString(3, pass);
             pstmt.executeUpdate();
+            conn.close();
             return true;
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
